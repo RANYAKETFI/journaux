@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/icomoon/style.css' )}}">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+    <title>Par semaine</title>
+  </head>
+  <body>
+  
+
+  <div class="content">
+    
+    <div class="container">
+      <div class="row align-items-stretch no-gutters contact-wrap">
+        <div class="col-md-8">
+          <div class="form h-100">
+            <h3>Les mots les plus fréquents : Journaux lyonnais </h3>
+            <h3> (depuis mi-mars 2021) </h3>
+          <b>  <h3> Par Semaine : </h3> </b>
+            <p> Veuillez choisir une semaine :</p>
+            <form class="mb-5" action="#" method="post" id="contactForm" name="contactForm">
+                <center>
+                <div class="col-md-6 form-group mb-5">
+                    <input type="week" name="week" id="camp-week"
+                    min="2021-W10" max="2021-W21" required>
+               
+              </div>
+            </center>
+             <center>
+            <div class="col-md-12 form-group">
+                <input type="submit" value="Chercher" class="btn btn-primary rounded-0 py-2 px-4">
+                <span class="chercher"></span>
+                
+              </div>
+                   
+            </center>
+              
+            </form>
+    
+            <table class="table  table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">classement</th>
+                    <th scope="col">Mot</th>
+                    <th scope="col">fréquence</th>
+        
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for c in content %}
+                  <tr>
+                      <td>{{loop.index }} </td>
+                   <td> {{c[0]}}</td>
+                   <td> {{c[1]}}</td>
+                  </tr>
+                  {% endfor %}
+    </tbody></table>
+    </div>
+    </div>
+        <div class="col-md-4">
+          <div class="contact-info h-100">
+            <h3>This is a test version : </h3>
+            
+            <p class="mb-5">If you have any suggestions , please write me on : hr_ketfi@esi.dz </p>
+            <ul class="list-unstyled">
+              <li class="d-flex">
+                <span class="text">KETFI Raniya</span>
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+    
+    
+
+    <script src="{{ url_for('static', filename=' js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.validate.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/main.js')}} "></script>
+
+  </body>
+</html>
