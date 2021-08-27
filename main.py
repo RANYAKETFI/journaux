@@ -25,7 +25,7 @@ def semaine():
     f=0
     semaine=""
     freq=[]
-    with open("C:\\Users\\asus\\Downloads\\jeu_journaux\\journaux.json", encoding="utf8") as f:
+    with open("static/journaux.json", encoding="utf8") as f:
       data = json.load(f)
     for a in data['articles']:
       a['published']= datetime.strptime(a['published'],"%Y-%m-%dT%H:%M:%S.%f%z")  
