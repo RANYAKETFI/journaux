@@ -19,20 +19,23 @@ def home():
     return render_template("home.html")
 @app.route("/semaine",methods=["POST","GET"])
 def semaine():
+    #Rechercher les 10 mots les plus fréquents par semaine : 
     l=[]
-    c="this"
     index=0
     f=0
     semaine=""
     freq=[]
+    #importer le fichier json des articles
     with open("static/journaux.json", encoding="utf8") as f:
       data = json.load(f)
+    #transformer le champs published de string vers datetime selon le format ISO  
     for a in data['articles']:
       a['published']= datetime.strptime(a['published'],"%Y-%m-%dT%H:%M:%S.%f%z")  
+    #mettre data dans une structure de dataframe
     df=pd.DataFrame(data['articles'], columns=['type', 'title', '@timestamp','published'])
     ##decouper en semaine : 
     weeks = [g.reset_index() for n, g in df.groupby(pd.Grouper(key='published',freq='W'))]
-    
+    #lire la semaine
     if request.method=="POST":
 
       semaine=request.form["week"]
@@ -49,7 +52,6 @@ def semaine():
 
     f=0
     for i in weeks :
-      #l.append([time.strptime(weeks[f]["published"][0].strftime('%m/%d/%y'),"%m/%d/%y"),Counter(" ".join(i["title"]).split()).most_common(10)])
       l.append([strftime('Semaine:%U-%Y',time.strptime(weeks[f]["published"][0].strftime('%m/%d/%y'),"%m/%d/%y")),Counter(" ".join(i["title"]).split()).most_common(10)])
 
       f=f+1
@@ -72,7 +74,7 @@ def freq():
     semaine=""
     freq=[]
  
-    with open("C:\\Users\\asus\\Downloads\\jeu_journaux\\journaux.json", encoding="utf8") as f:
+    with open("static/journaux.json", encoding="utf8") as f:
       data = json.load(f)
     for a in data['articles']:
       a['published']= datetime.strptime(a['published'],"%Y-%m-%dT%H:%M:%S.%f%z")  
